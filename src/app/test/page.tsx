@@ -2,6 +2,9 @@
 
 import { useState } from 'react'
 import AppShell from '@/components/AppShell'
+
+// Disable static generation for this page to avoid theme context issues during build
+export const dynamic = 'force-dynamic'
 import {
   Building,
   Users,
