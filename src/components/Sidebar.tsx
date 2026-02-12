@@ -86,10 +86,9 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
         <div className="p-3">
           <Link
             href="/"
-            className="flex items-center gap-2 w-full px-4 py-2.5 rounded-xl
-              bg-[var(--brand-primary)] text-white font-semibold text-sm
-              hover:bg-[var(--brand-primary-dark)] transition-all
-              hover:-translate-y-0.5 hover:shadow-md no-underline"
+            className="flex items-center gap-2 w-full px-3 py-2 rounded-lg
+              bg-[var(--brand-primary)] text-white font-medium text-sm
+              hover:bg-[var(--brand-primary-dark)] transition-colors no-underline"
           >
             <Plus size={18} />
             New Conversation
@@ -135,12 +134,12 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                       key={item.id}
                       href={`/chat/${item.id}`}
                       className={`
-                        flex items-center gap-2 px-3 py-2 rounded-xl mb-0.5 text-sm font-medium
+                        flex items-center gap-2 px-3 py-1.5 rounded-lg mb-0.5 text-sm
                         transition-colors no-underline truncate
                         ${
                           isActive
-                            ? 'bg-[var(--brand-primary)] text-white'
-                            : 'text-[var(--text-primary)] hover:bg-[var(--bg-hover)]'
+                            ? 'bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-medium'
+                            : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]'
                         }
                       `}
                     >

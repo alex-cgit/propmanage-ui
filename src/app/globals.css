@@ -44,18 +44,18 @@
 
 /* ==================== DARK MODE ==================== */
 [data-theme="dark"] {
-  --bg-primary: #0C0C0C;
-  --bg-secondary: #181818;
-  --bg-tertiary: #202020;
-  --bg-hover: #282828;
-  --text-primary: #ECECEC;
-  --text-secondary: #A8A29E;
-  --text-tertiary: #78716C;
-  --border-color: #292524;
+  --bg-primary: #202123;
+  --bg-secondary: #2C2D30;
+  --bg-tertiary: #363739;
+  --bg-hover: #3E3F42;
+  --text-primary: #ECECF1;
+  --text-secondary: #C5C5D2;
+  --text-tertiary: #8E8EA0;
+  --border-color: #3E3F42;
   --border-focus: var(--brand-primary-light);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* ==================== BASE STYLES ==================== */
