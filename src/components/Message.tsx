@@ -125,18 +125,14 @@ export default function Message({ message, onSuggestionClick }: MessageProps) {
         </div>
       )}
 
-      {/* Suggestion Chips */}
+      {/* Suggestion Chips - Perplexity style */}
       {message.suggestions && message.suggestions.length > 0 && (
-        <div className="pl-10 flex flex-wrap gap-2 mt-2">
+        <div className="pl-10 flex flex-wrap gap-2 mt-3">
           {message.suggestions.map((s) => (
             <button
               key={s}
               onClick={() => onSuggestionClick?.(s)}
-              className="px-3 py-1.5 rounded-full text-sm font-medium
-                bg-[var(--bg-secondary)] border border-[var(--border-color)]
-                text-[var(--text-primary)] whitespace-nowrap
-                hover:bg-[var(--brand-primary-light)] hover:text-white hover:border-[var(--brand-primary-light)]
-                hover:-translate-y-0.5 hover:shadow-sm transition-all"
+              className="suggestion-chip"
             >
               {s}
             </button>

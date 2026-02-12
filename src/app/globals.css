@@ -120,7 +120,7 @@ body {
 
 /* ==================== COMPONENT LAYER ==================== */
 @layer components {
-  /* Citation badges */
+  /* Citation badges - Perplexity style */
   .citation {
     @apply inline-flex items-center justify-center;
     min-width: 20px;
@@ -138,47 +138,60 @@ body {
   }
 
   .citation:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: var(--brand-primary);
   }
 
-  /* Skeleton loaders */
-  .skeleton {
-    border-radius: 12px;
-    background: linear-gradient(
-      90deg,
-      var(--bg-tertiary) 25%,
-      var(--bg-hover) 50%,
-      var(--bg-tertiary) 75%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-
-  /* Toast notifications */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    padding: 12px 24px;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    z-index: 1070;
+  /* Suggestion chips - Perplexity style */
+  .suggestion-chip {
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
   }
 
-  /* Animated gradient (for loading bars, accents) */
-  .animated-gradient {
-    background: linear-gradient(
-      -45deg,
-      var(--brand-primary),
-      var(--brand-teal),
-      var(--brand-primary-light),
-      var(--brand-primary)
-    );
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
+  .suggestion-chip:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--brand-primary);
+    color: var(--brand-primary);
+  }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 1rem 0;
+  }
+
+  .typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-tertiary);
+    animation: typing 1.4s infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
   }
 }
