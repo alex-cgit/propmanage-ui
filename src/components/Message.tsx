@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Copy, ThumbsUp, ThumbsDown, RotateCcw } from 'lucide-react'
+import { Copy, ThumbsUp, ThumbsDown, RotateCcw, Check } from 'lucide-react'
+import { useToast } from '@/contexts/ToastContext'
 
 export interface Citation {
   number: number
@@ -22,11 +23,15 @@ export interface MessageData {
 interface MessageProps {
   message: MessageData
   onSuggestionClick?: (text: string) => void
+  onRegenerate?: (messageId: string) => void
 }
 
-export default function Message({ message, onSuggestionClick }: MessageProps) {
+export default function Message({ message, onSuggestionClick, onRegenerate }: MessageProps) {
   const [hoveredCitation, setHoveredCitation] = useState<Citation | null>(null)
   const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 })
+  const [feedback, setFeedback] = useState<'up' | 'down' | null>(null)
+  const [copied, setCopied] = useState(false)
+  const { showToast } = useToast()
 
   const isUser = message.role === 'user'
 
@@ -37,6 +42,47 @@ export default function Message({ message, onSuggestionClick }: MessageProps) {
       left: Math.min(rect.left, window.innerWidth - 316),
     })
     setHoveredCitation(citation)
+  }
+
+  const handleCopy = async () => {
+    try {
+      // Strip HTML tags from content
+      const plainText = message.content.replace(/<[^>]*>/g, '')
+      await navigator.clipboard.writeText(plainText)
+      setCopied(true)
+      showToast('Copied to clipboard', 'success')
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      showToast('Failed to copy', 'error')
+    }
+  }
+
+  const handleFeedback = async (rating: 'up' | 'down') => {
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messageId: message.id, rating })
+      })
+
+      if (response.ok) {
+        setFeedback(rating)
+        showToast(
+          rating === 'up' ? 'Thanks for your feedback!' : 'Feedback received',
+          'success'
+        )
+      } else {
+        throw new Error('Failed to submit feedback')
+      }
+    } catch (err) {
+      showToast('Failed to submit feedback', 'error')
+    }
+  }
+
+  const handleRegenerate = () => {
+    if (onRegenerate) {
+      onRegenerate(message.id)
+    }
   }
 
   return (
@@ -99,26 +145,42 @@ export default function Message({ message, onSuggestionClick }: MessageProps) {
       {!isUser && (
         <div className="pl-10 flex items-center gap-1 mt-1">
           <button
+            onClick={handleCopy}
             className="p-1.5 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
             title="Copy"
+            aria-label="Copy message"
           >
-            <Copy size={15} />
+            {copied ? <Check size={15} /> : <Copy size={15} />}
           </button>
           <button
-            className="p-1.5 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
+            onClick={() => handleFeedback('up')}
+            className={`p-1.5 rounded-lg transition-colors ${
+              feedback === 'up'
+                ? 'text-[var(--brand-success)] bg-[var(--bg-hover)]'
+                : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)]'
+            }`}
             title="Good response"
+            aria-label="Like this response"
           >
-            <ThumbsUp size={15} />
+            <ThumbsUp size={15} fill={feedback === 'up' ? 'currentColor' : 'none'} />
           </button>
           <button
-            className="p-1.5 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
+            onClick={() => handleFeedback('down')}
+            className={`p-1.5 rounded-lg transition-colors ${
+              feedback === 'down'
+                ? 'text-[var(--brand-accent)] bg-[var(--bg-hover)]'
+                : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)]'
+            }`}
             title="Bad response"
+            aria-label="Dislike this response"
           >
-            <ThumbsDown size={15} />
+            <ThumbsDown size={15} fill={feedback === 'down' ? 'currentColor' : 'none'} />
           </button>
           <button
+            onClick={handleRegenerate}
             className="p-1.5 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
             title="Regenerate"
+            aria-label="Regenerate response"
           >
             <RotateCcw size={15} />
           </button>

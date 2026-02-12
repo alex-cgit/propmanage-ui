@@ -96,6 +96,18 @@ function ChatContent() {
     }, 1500)
   }
 
+  const handleRegenerate = (messageId: string) => {
+    const messageIndex = messages.findIndex(m => m.id === messageId)
+    if (messageIndex > 0) {
+      const userMessage = messages[messageIndex - 1]
+      if (userMessage.role === 'user') {
+        // Remove the current assistant message and regenerate
+        setMessages(prev => prev.slice(0, messageIndex))
+        handleSend(userMessage.content)
+      }
+    }
+  }
+
   return (
     <AppShell>
       <div className="flex-1 flex flex-col max-w-chat mx-auto w-full px-4 md:px-6">
@@ -106,6 +118,7 @@ function ChatContent() {
               key={msg.id}
               message={msg}
               onSuggestionClick={handleSend}
+              onRegenerate={handleRegenerate}
             />
           ))}
           {isStreaming && <TypingIndicator />}
