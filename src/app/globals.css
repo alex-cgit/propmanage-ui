@@ -9,33 +9,32 @@
 
 /* ==================== CSS VARIABLES ==================== */
 :root {
-  /* Brand Colors */
-  --brand-primary: #0066CC;
-  --brand-primary-dark: #004C99;
-  --brand-primary-light: #3385D6;
-  --brand-teal: #00A3AD;
-  --brand-orange: #FF6B35;
-  --brand-green: #00A651;
+  /* Brand Colors - Perplexity-inspired */
+  --brand-primary: #20808D;
+  --brand-primary-dark: #1A6B77;
+  --brand-primary-light: #2D99A8;
+  --brand-accent: #FF6B6B;
+  --brand-success: #51CF66;
 
-  /* Light Mode Colors */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8F9FA;
-  --bg-tertiary: #F0F2F5;
-  --bg-hover: #E8EAED;
-  --text-primary: #1A1A1A;
-  --text-secondary: #4A4A4A;
-  --text-tertiary: #6B6B6B;
-  --border-color: #E5E5E5;
+  /* Light Mode Colors - Perplexity Style */
+  --bg-primary: #FAFAF9;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5F5F4;
+  --bg-hover: #F0F0EF;
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-tertiary: #94A3B8;
+  --border-color: #E7E5E4;
   --border-focus: var(--brand-primary);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   /* Layout */
-  --sidebar-width: 280px;
-  --header-height: 60px;
-  --input-height: 56px;
-  --max-content-width: 768px;
+  --sidebar-width: 260px;
+  --header-height: 56px;
+  --input-height: 52px;
+  --max-content-width: 720px;
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -45,18 +44,18 @@
 
 /* ==================== DARK MODE ==================== */
 [data-theme="dark"] {
-  --bg-primary: #0F0F0F;
-  --bg-secondary: #1A1A1A;
-  --bg-tertiary: #242424;
-  --bg-hover: #2A2A2A;
-  --text-primary: #E5E5E5;
-  --text-secondary: #A0A0A0;
-  --text-tertiary: #707070;
-  --border-color: #2A2A2A;
+  --bg-primary: #0C0C0C;
+  --bg-secondary: #181818;
+  --bg-tertiary: #202020;
+  --bg-hover: #282828;
+  --text-primary: #ECECEC;
+  --text-secondary: #A8A29E;
+  --text-tertiary: #78716C;
+  --border-color: #292524;
   --border-focus: var(--brand-primary-light);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* ==================== BASE STYLES ==================== */
@@ -74,12 +73,13 @@ html {
 }
 
 body {
-  font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'SF Pro Display', Roboto, sans-serif;
+  line-height: 1.65;
   color: var(--text-primary);
   background-color: var(--bg-primary);
   overflow-x: hidden;
   transition: background-color var(--transition-base), color var(--transition-base);
+  font-size: 15px;
 }
 
 /* ==================== SCROLLBAR ==================== */
