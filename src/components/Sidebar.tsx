@@ -87,8 +87,8 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
           <Link
             href="/"
             className="flex items-center gap-2 w-full px-3 py-2 rounded-lg
-              bg-[var(--brand-primary)] text-white font-medium text-sm
-              hover:bg-[var(--brand-primary-dark)] transition-colors no-underline"
+              border border-[var(--border-color)] text-[var(--text-primary)] font-medium text-sm
+              hover:bg-[var(--bg-hover)] hover:border-[var(--brand-primary)] transition-colors no-underline"
           >
             <Plus size={18} />
             New Conversation
@@ -138,7 +138,7 @@ export default function Sidebar({ isOpen, onToggle }: SidebarProps) {
                         transition-colors no-underline truncate
                         ${
                           isActive
-                            ? 'bg-[var(--bg-tertiary)] text-[var(--text-primary)] font-medium'
+                            ? 'bg-[var(--bg-tertiary)] text-[var(--text-primary)]'
                             : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]'
                         }
                       `}
